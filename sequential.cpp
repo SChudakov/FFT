@@ -1,22 +1,18 @@
 //
 // Created by semen on 12.04.19.
 //
-#include <vector>
-#include <complex>
-#include <math.h>
 
-#define _USE_MATH_DEFINES
+#include "sequential.hpp"
 
-namespace sequential {
 
-    typedef std::complex<double> base;
+namespace {
 
     void fft(std::vector<base> &a, bool invert) {
         int n = (int) a.size();
         if (n == 1) return;
 
-        std::vector<base> a0(n / 2);
-        std::vector<base> a1(n / 2);
+        std::vector<base> a0(static_cast<unsigned long>(n / 2));
+        std::vector<base> a1(static_cast<unsigned long>(n / 2));
         for (int i = 0, j = 0; i < n; i += 2, ++j) {
             a0[j] = a[i];
             a1[j] = a[i + 1];
@@ -38,10 +34,11 @@ namespace sequential {
             w *= wn;
         }
     }
+}
 
-    std::vector<int> multiply(const std::vector<int> &a,
-                              const std::vector<int> &b) {
+namespace sequential {
 
+    std::vector<int> multiply(const std::vector<int> &a, const std::vector<int> &b) {
         std::vector<int> result;
 
         std::vector<base> fa(a.begin(), a.end());
@@ -50,17 +47,17 @@ namespace sequential {
         while (n < std::max(a.size(), b.size())) {
             n <<= 1;
         }
-        n <<= 1;
+//        n <<= 1;
 
         fa.resize(n), fb.resize(n);
 
-        fft(fa, false);
-        fft(fb, false);
+        ::fft(fa, false);
+        ::fft(fb, false);
         for (size_t i = 0; i < n; ++i) {
             fa[i] *= fb[i];
         }
 
-        fft(fa, true);
+        ::fft(fa, true);
 
         result.resize(n);
         for (size_t i = 0; i < n; ++i) {
