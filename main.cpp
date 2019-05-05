@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+#include <omp.h>
 
 #include "persistence.hpp"
 #include "benchmark.hpp"
@@ -17,6 +18,8 @@ void measure_time(std::function<std::vector<int>(std::vector<int>, std::vector<i
 }
 
 int main() {
+    omp_set_num_threads(8);
+
     long size = 10000000;
     std::string a_file = "/home/semen/drive/workspace.cpp/parallel/data/a.txt";
     std::string b_file = "/home/semen/drive/workspace.cpp/parallel/data/b.txt";
@@ -40,7 +43,7 @@ int main() {
     auto parallel = [](std::vector<int> a, std::vector<int> b) { return parallel::multiply(a, b); };
     auto distributed = [](std::vector<int> a, std::vector<int> b) { return distributed::multiply(a, b); };
 
-    measure_time(sequential, a, b, sequential_desc);
+//    measure_time(sequential, a, b, sequential_desc);
     measure_time(parallel, a, b, parallel_desc);
 //    measure_time(distributed, a, b, distributed_desc);
 
