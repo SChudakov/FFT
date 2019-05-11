@@ -6,7 +6,6 @@
 
 
 namespace {
-
     void fft(std::vector<base> &a, bool invert) {
         int n = (int) a.size();
         if (n == 1) return;

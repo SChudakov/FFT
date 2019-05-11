@@ -13,6 +13,8 @@
 namespace persistence {
     std::vector<int> read_vector(const std::string &path);
 
+    void write_vector(const std::string &path, const std::vector<int> &vector);
+
     void generate(const std::string &path, long size);
 }
 

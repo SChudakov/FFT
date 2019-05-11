@@ -13,21 +13,29 @@ namespace persistence {
         int i;
         while (read_stream >> i) {
             result.push_back(i);
-//            std::cout << i << std::endl;
         }
         return result;
     }
 
     void generate(const std::string &path, long size) {
-        std::ofstream write_stream(path);
+        std::vector<int> vector(static_cast<unsigned long>(size));
 
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> dis(0);
 
         for (int i = 0; i < size; ++i) {
-            write_stream << dis(gen) << ' ';
+            vector.push_back(dis(gen));
         }
+        write_vector(path, vector);
+    }
+
+    void write_vector(const std::string &path, const std::vector<int> &vector) {
+        std::ofstream write_stream(path);
+        for (int i : vector) {
+            write_stream << i << ' ';
+        }
+        write_stream.close();
     }
 }
 
