@@ -18,7 +18,7 @@ void measure_time(std::function<std::vector<int>(std::vector<int>, std::vector<i
 }
 
 int main() {
-    omp_set_num_threads(8);
+    omp_set_num_threads(12);
 
     long size = 10000000;
     std::string a_file = "/home/semen/drive/workspace.cpp/parallel/data/a.txt";
@@ -38,7 +38,7 @@ int main() {
     auto sequential = [](std::vector<int> a, std::vector<int> b) { return sequential::multiply(a, b); };
     auto parallel = [](std::vector<int> a, std::vector<int> b) { return parallel::multiply(a, b); };
 
-    measure_time(sequential, a, b, sequential_desc);
+//    measure_time(sequential, a, b, sequential_desc);
     measure_time(parallel, a, b, parallel_desc);
 
     return 0;

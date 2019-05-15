@@ -15,14 +15,14 @@ find_package(Boost 1.65.1 COMPONENTS system filesystem mpi serialization REQUIRE
 
 add_executable(parallel
 #        main.cpp
-#        benchmark.hpp
-#        benchmark.cpp
-#        generate.cpp
+        benchmark.hpp
+        benchmark.cpp
+        generate.cpp
         sequential.hpp
         sequential.cpp
         parallel.hpp
         parallel.cpp
-        distributed.cpp
+#        distributed.cpp
         persistence.hpp
         persistence.cpp
         Timer.hpp
@@ -32,5 +32,7 @@ add_executable(parallel
 message(${Boost_LIBRARIES})
 
 include_directories(${Boost_INCLUDE_DIRS})
-
+message(${Boost_LIBRARIES})
 target_link_libraries(parallel ${Boost_LIBRARIES})
+
+#-np 12 /home/semen/drive/workspace.cpp/parallel/cmake-build-release/parallel

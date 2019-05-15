@@ -6,11 +6,11 @@
 #include "persistence.hpp"
 
 int main() {
-    int processor_count = 24;
-    int vectors_length = 1000000;
+    int numOfTasks = 24;
+    long vectors_length = 1000000;
     std::string base_prefix = "/home/semen/drive/workspace.cpp/parallel/data/tasks/";
 
-    for (int i = 0; i < processor_count; i++) {
+    for (int i = 0; i < numOfTasks; i++) {
         std::cout << "generating " << i << std::endl;
         std::string directory_path = base_prefix + std::to_string(i) + "/";
         if (!boost::filesystem::exists(directory_path)) {

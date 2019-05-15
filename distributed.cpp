@@ -40,6 +40,8 @@ int main(int argc, char **argv) {
 
     Timer timer;
 
+    world.barrier();
+
     if (rank == 0) {
         timer.start();
     }
